@@ -1,14 +1,14 @@
 from pydantic import BaseModel
 
-class SubscriptionRequest(BaseModel):
-    name: str
-    price: int
-    features: list[str]
+class SubscriptionBase(BaseModel):
+    plan: str
+    status: str
 
-class SubscriptionResponse(BaseModel):
+class SubscriptionCreate(SubscriptionBase):
+    user_id: int
+
+class SubscriptionResponse(SubscriptionBase):
     id: int
-    name: str
-    price: int
-    features: list[str]
-    is_active: bool
 
+    class Config:
+        orm_mode = True
