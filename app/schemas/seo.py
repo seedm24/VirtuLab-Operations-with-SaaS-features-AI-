@@ -1,11 +1,15 @@
 from pydantic import BaseModel
 
-class SEOAnalysisRequest(BaseModel):
-    url: str
+class SEOBase(BaseModel):
+    title: str
+    description: str
+    keywords: str
 
-class SEOAnalysisResponse(BaseModel):
-    url: str
-    score: int
-    top_keywords: list[str]
-    recommendations: list[str]
+class SEOCreate(SEOBase):
+    pass
 
+class SEOResponse(SEOBase):
+    id: int
+
+    class Config:
+        orm_mode = True
